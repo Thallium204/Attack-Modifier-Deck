@@ -4,70 +4,45 @@ var texCard_tscn = preload("res://texCard.tscn")
 
 export var activeColor: Color
 
-var classes = {
-	"base":
-		{"dir":"P","cards":[
-			{"value":+0,"types":[],"rolling":false},
-			{"value":+0,"types":[],"rolling":false},
-			{"value":+0,"types":[],"rolling":false},
-			{"value":+0,"types":[],"rolling":false},
-			{"value":+0,"types":[],"rolling":false},
-			{"value":+0,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-2,"types":[],"rolling":false},
-			{"value":+2,"types":[],"rolling":false},
-			{"value":false,"types":[],"rolling":false},
-			{"value":true,"types":[],"rolling":false}
-		]},
-	"Brute":
-		{"dir":"P","cards":[
-			{"value":+0,"types":["pierce_3"],"rolling":true},
-			{"value":+0,"types":["stun"],"rolling":true},
-			{"value":+0,"types":[],"rolling":true},
-			{"value":+0,"types":[],"rolling":false},
-			{"value":+0,"types":[],"rolling":false},
-			{"value":+0,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":+1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-1,"types":[],"rolling":false},
-			{"value":-2,"types":[],"rolling":false},
-			{"value":+2,"types":[],"rolling":false},
-			{"value":false,"types":[],"rolling":false},
-			{"value":true,"types":[],"rolling":false}
-		]},
-	"Cragheart":
-		{"dir":"CH","cards":18},
-	"Mindthief":
-		{"dir":"MT","cards":20},
-	"Scoundrel":
-		{"dir":"SC","cards":17},
-	"Spellweaver":
-		{"dir":"SW","cards":18},
-	"Tinkerer":
-		{"dir":"TI","cards":16}
-	}
+var baseCards = [
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-01.png","rolling":false,"types":[],"value":+0},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-02.png","rolling":false,"types":[],"value":+0},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-03.png","rolling":false,"types":[],"value":+0},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-04.png","rolling":false,"types":[],"value":+0},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-05.png","rolling":false,"types":[],"value":+0},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-06.png","rolling":false,"types":[],"value":+0},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-07.png","rolling":false,"types":[],"value":+1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-08.png","rolling":false,"types":[],"value":+1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-09.png","rolling":false,"types":[],"value":+1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-10.png","rolling":false,"types":[],"value":+1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-11.png","rolling":false,"types":[],"value":+1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-12.png","rolling":false,"types":[],"value":-1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-13.png","rolling":false,"types":[],"value":-1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-14.png","rolling":false,"types":[],"value":-1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-15.png","rolling":false,"types":[],"value":-1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-16.png","rolling":false,"types":[],"value":-1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-17.png","rolling":false,"types":[],"value":-2},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-18.png","rolling":false,"types":[],"value":+2},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-19.png","rolling":false,"types":[],"value":false},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player/am-p-20.png","rolling":false,"types":[],"value":true},
+]
+
+var addCards = [
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player-mod/am-pm-01.png","rolling":false,"types":[],"value":true},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player-mod/am-pm-02.png","rolling":false,"types":[],"value":true},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player-mod/am-pm-11.png","rolling":false,"types":[],"value":-1},
+	{"elements":[],"imagePath":"res://attack-modifiers/base/player-mod/am-pm-12.png","rolling":false,"types":[],"value":-1},
+]
+
+var classCards = {}
 
 var activeClass = ""
 
 func _ready():
 	
-	for className in classes:
+	loadMetaData()
+	
+	for className in classCards:
 		
 		var btnClass = Button.new()
 		btnClass.name = className
@@ -82,6 +57,7 @@ func makeClassActive(className):
 	activeClass = className
 	
 	updateButtonUI()
+	_on_btnReset_pressed()
 
 func updateButtonUI():
 	
@@ -97,16 +73,11 @@ func generateBaseDeck():
 	# Delete all base cards
 	get_tree().call_group("deckCard","queue_free")
 	
-	for ID in range(1,20+1):
-		
-		var strID = "0"+str(ID) if str(ID).length() == 1 else str(ID)
+	for cardData in baseCards:
 		
 		var texCard = texCard_tscn.instance()
-		texCard.name = "base"+strID
-		texCard.texture = load("res://attack-modifiers/base/player/am-p-"+strID+".png")
-		texCard.get_node("btnCard").connect("pressed",self,"cardPressed",[texCard,"base"])
-		texCard.add_to_group("baseCard")
-		texCard.add_to_group("deckCard")
+		texCard.configure("base",cardData)
+		texCard.get_node("btnCard").connect("pressed",self,"cardPressed",[texCard,cardData,"base"])
 		$contDeck/gridDeck.add_child(texCard)
 
 func generateClassDeck():
@@ -115,23 +86,19 @@ func generateClassDeck():
 	get_tree().call_group("classCard","queue_free")
 	
 	# Check we have a class selected
-	if activeClass == "":
+	if activeClass == "" or activeClass == "base":
 		return
 	
-	for ID in range(1,classes[activeClass].cards+1):
-		
-		var strID = "0"+str(ID) if str(ID).length() == 1 else str(ID)
+	for cardData in classCards[activeClass].cards + addCards:
 		
 		var texCard = texCard_tscn.instance()
-		var classCode: String = classes[activeClass].dir
-		texCard.name = classCode+strID
-		texCard.texture = load("res://attack-modifiers/"+classCode+"/am-"+classCode.to_lower()+"-"+strID+".png")
-		texCard.get_node("btnCard").connect("pressed",self,"cardPressed",[texCard,"class"])
-		texCard.add_to_group("baseCard")
-		texCard.add_to_group("deckCard")
+		texCard.configure("class",cardData)
+		texCard.get_node("btnCard").connect("pressed",self,"cardPressed",[texCard,cardData,"class"])
 		$contClass/gridClass.add_child(texCard)
+	
+	
 
-func cardPressed(btnCard,type):
+func cardPressed(btnCard,cardData,type):
 	
 	if type == "base":
 		
@@ -139,13 +106,48 @@ func cardPressed(btnCard,type):
 		
 	elif type == "class":
 		
-		var new_btnCard = btnCard.duplicate(true)
+		var new_btnCard = texCard_tscn.instance()
+		new_btnCard.configure("class",cardData)
+		new_btnCard.get_node("btnCard").connect("pressed",self,"cardPressed",[new_btnCard,cardData,"class"])
+		if btnCard in get_tree().get_nodes_in_group("deckCard"):
+			new_btnCard.add_to_group("classCard")
+			$contClass/gridClass.add_child(new_btnCard)
+		elif btnCard in get_tree().get_nodes_in_group("classCard"):
+			new_btnCard.add_to_group("deckCard")
+			$contDeck/gridDeck.add_child(new_btnCard)
 		btnCard.queue_free()
-		$contDeck/gridDeck.add_child(new_btnCard)
+
+func calculateAverage():
+	
+	var cards = get_tree().get_nodes_in_group("deckCard")
+	var average = {"D":0.0,"V":0.0}
+	for texCard in cards:
+		if texCard.value is bool:
+			if texCard.value == true:
+				average.D += 2
+		else:
+			average.D += 1
+			average.V += texCard.value
+	
+	var damageMult = stepify(average.D/cards.size(),0.01)
+	var damageMod = stepify(average.V/cards.size(),0.01)
+	$hboxControl/contAverage/labelAverage.text = "Av: " + str(damageMult) + "D + " + str(damageMod)
 
 func _on_btnReset_pressed():
 	generateBaseDeck()
 	generateClassDeck()
 
 func _on_btnFormat_pressed():
-	get_tree().change_scene("res://Format.tscn")
+	var _ERROR_CODE = get_tree().change_scene("res://Format.tscn")
+
+func _on_btnCalculate_pressed():
+	calculateAverage()
+
+func loadMetaData():
+	var saveFile = File.new()
+	if not saveFile.file_exists("user://card_data.save"):
+		return
+	saveFile.open("user://card_data.save", File.READ)
+	classCards = parse_json(saveFile.get_line())
+	saveFile.close()
+

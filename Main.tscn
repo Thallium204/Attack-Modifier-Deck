@@ -47,17 +47,39 @@ __meta__ = {
 }
 
 [node name="btnReset" type="Button" parent="hboxControl"]
-margin_right = 510.0
+margin_right = 253.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 text = "Reset"
 
 [node name="btnFormat" type="Button" parent="hboxControl"]
-margin_left = 514.0
-margin_right = 1024.0
+margin_left = 257.0
+margin_right = 510.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 text = "Format"
+
+[node name="btnCalculate" type="Button" parent="hboxControl"]
+margin_left = 514.0
+margin_right = 767.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+text = "Calculate"
+
+[node name="contAverage" type="PanelContainer" parent="hboxControl"]
+margin_left = 771.0
+margin_right = 1024.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+
+[node name="labelAverage" type="Label" parent="hboxControl/contAverage"]
+margin_left = 7.0
+margin_top = 14.0
+margin_right = 246.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+align = 1
+valign = 1
 
 [node name="contClass" type="PanelContainer" parent="."]
 anchor_top = 0.6
@@ -78,3 +100,4 @@ __meta__ = {
 }
 [connection signal="pressed" from="hboxControl/btnReset" to="." method="_on_btnReset_pressed"]
 [connection signal="pressed" from="hboxControl/btnFormat" to="." method="_on_btnFormat_pressed"]
+[connection signal="pressed" from="hboxControl/btnCalculate" to="." method="_on_btnCalculate_pressed"]

@@ -1,12 +1,40 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=30 format=2]
 
-[ext_resource path="res://attack-modifiers/BE/am-be-02.png" type="Texture" id=1]
+[ext_resource path="res://attack-modifiers/BR/am-br-20.png" type="Texture" id=1]
 [ext_resource path="res://themeMain.tres" type="Theme" id=2]
+[ext_resource path="res://icons/Double Damage.png" type="Texture" id=3]
+[ext_resource path="res://icons/No Damage.png" type="Texture" id=4]
+[ext_resource path="res://icons/Rolling.png" type="Texture" id=5]
+[ext_resource path="res://icons/Immobilize.png" type="Texture" id=6]
+[ext_resource path="res://icons/Disarm.png" type="Texture" id=7]
+[ext_resource path="res://icons/Wound.png" type="Texture" id=8]
+[ext_resource path="res://icons/Curse.png" type="Texture" id=9]
+[ext_resource path="res://icons/Strengthen.png" type="Texture" id=10]
+[ext_resource path="res://icons/Stun.png" type="Texture" id=11]
+[ext_resource path="res://icons/Pull.png" type="Texture" id=12]
+[ext_resource path="res://icons/Push.png" type="Texture" id=13]
+[ext_resource path="res://icons/Poison.png" type="Texture" id=14]
+[ext_resource path="res://icons/Invisibility.png" type="Texture" id=15]
+[ext_resource path="res://icons/Bless.png" type="Texture" id=16]
+[ext_resource path="res://icons/Muddle.png" type="Texture" id=17]
+[ext_resource path="res://icons/Add Target.png" type="Texture" id=18]
+[ext_resource path="res://icons/Pierce.png" type="Texture" id=19]
+[ext_resource path="res://icons/Ice.png" type="Texture" id=20]
+[ext_resource path="res://icons/Earth.png" type="Texture" id=21]
+[ext_resource path="res://icons/Dark.png" type="Texture" id=22]
+[ext_resource path="res://icons/Light.png" type="Texture" id=23]
+[ext_resource path="res://icons/Fire.png" type="Texture" id=24]
+[ext_resource path="res://icons/Any Element.png" type="Texture" id=25]
+[ext_resource path="res://icons/Air.png" type="Texture" id=26]
+[ext_resource path="res://Format.gd" type="Script" id=27]
+[ext_resource path="res://icons/Shield.png" type="Texture" id=28]
+[ext_resource path="res://icons/Heal.png" type="Texture" id=29]
 
 [node name="Format" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
+script = ExtResource( 27 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -27,17 +55,366 @@ texture = ExtResource( 1 )
 expand = true
 stretch_mode = 6
 
-[node name="contValue" type="PanelContainer" parent="."]
+[node name="hboxOptions" type="HBoxContainer" parent="."]
 anchor_top = 0.8
-anchor_right = 0.2
+anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpinBox" type="SpinBox" parent="contValue"]
+[node name="contValue" type="PanelContainer" parent="hboxOptions"]
+margin_right = 106.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpinBox" type="SpinBox" parent="hboxOptions/contValue"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 201.0
+margin_right = 99.0
 margin_bottom = 113.0
+min_value = -3.0
+max_value = 3.0
 align = 1
+
+[node name="contCritOrMiss" type="PanelContainer" parent="hboxOptions"]
+margin_left = 106.0
+margin_right = 212.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="hboxOptions/contCritOrMiss"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 99.0
+margin_bottom = 113.0
+
+[node name="btnCrit" type="Button" parent="hboxOptions/contCritOrMiss/vbox"]
+margin_right = 92.0
+margin_bottom = 51.0
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 3 )
+expand_icon = true
+
+[node name="btnMiss" type="Button" parent="hboxOptions/contCritOrMiss/vbox"]
+margin_top = 55.0
+margin_right = 92.0
+margin_bottom = 106.0
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 4 )
+expand_icon = true
+
+[node name="contRolling" type="PanelContainer" parent="hboxOptions"]
+margin_left = 212.0
+margin_right = 318.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="checkCrit" type="Button" parent="hboxOptions/contRolling"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 99.0
+margin_bottom = 113.0
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 5 )
+expand_icon = true
+
+[node name="contTypes" type="PanelContainer" parent="hboxOptions"]
+margin_left = 318.0
+margin_right = 718.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gridTypes" type="GridContainer" parent="hboxOptions/contTypes"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 393.0
+margin_bottom = 113.0
+columns = 8
+
+[node name="btnCurse" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_right = 44.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 9 )
+expand_icon = true
+
+[node name="btnPoison" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 48.0
+margin_right = 92.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 14 )
+expand_icon = true
+
+[node name="btnDisarm" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 96.0
+margin_right = 140.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 7 )
+expand_icon = true
+
+[node name="btnMuddle" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 144.0
+margin_right = 188.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 17 )
+expand_icon = true
+
+[node name="btnPush" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 192.0
+margin_right = 236.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 13 )
+expand_icon = true
+
+[node name="btnTarget" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 240.0
+margin_right = 284.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 18 )
+expand_icon = true
+
+[node name="btnInvisible" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 288.0
+margin_right = 332.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 15 )
+expand_icon = true
+
+[node name="btnHeal" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 336.0
+margin_right = 380.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 29 )
+expand_icon = true
+
+[node name="btnBless" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_top = 55.0
+margin_right = 44.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 16 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btnWound" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 48.0
+margin_top = 55.0
+margin_right = 92.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 8 )
+expand_icon = true
+
+[node name="btnImmobilize" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 96.0
+margin_top = 55.0
+margin_right = 140.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 6 )
+expand_icon = true
+
+[node name="btnStrengthen" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 144.0
+margin_top = 55.0
+margin_right = 188.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 10 )
+expand_icon = true
+
+[node name="btnPull" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 192.0
+margin_top = 55.0
+margin_right = 236.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 12 )
+expand_icon = true
+
+[node name="btnPierce" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 240.0
+margin_top = 55.0
+margin_right = 284.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 19 )
+expand_icon = true
+
+[node name="btnStun" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 288.0
+margin_top = 55.0
+margin_right = 332.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 11 )
+expand_icon = true
+
+[node name="btnShield" type="Button" parent="hboxOptions/contTypes/gridTypes"]
+margin_left = 336.0
+margin_top = 55.0
+margin_right = 380.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 28 )
+expand_icon = true
+
+[node name="contElements" type="PanelContainer" parent="hboxOptions"]
+margin_left = 718.0
+margin_right = 918.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gridElements" type="GridContainer" parent="hboxOptions/contElements"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 113.0
+columns = 4
+
+[node name="btnFire" type="Button" parent="hboxOptions/contElements/gridElements"]
+margin_right = 43.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 24 )
+expand_icon = true
+
+[node name="btnAir" type="Button" parent="hboxOptions/contElements/gridElements"]
+margin_left = 47.0
+margin_right = 90.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 26 )
+expand_icon = true
+
+[node name="btnLight" type="Button" parent="hboxOptions/contElements/gridElements"]
+margin_left = 94.0
+margin_right = 137.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 23 )
+expand_icon = true
+
+[node name="btnAny" type="Button" parent="hboxOptions/contElements/gridElements"]
+margin_left = 141.0
+margin_right = 184.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 25 )
+expand_icon = true
+
+[node name="btnIce" type="Button" parent="hboxOptions/contElements/gridElements"]
+margin_top = 55.0
+margin_right = 43.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 20 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btnEarth" type="Button" parent="hboxOptions/contElements/gridElements"]
+margin_left = 47.0
+margin_top = 55.0
+margin_right = 90.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 21 )
+expand_icon = true
+
+[node name="btnDark" type="Button" parent="hboxOptions/contElements/gridElements"]
+margin_left = 94.0
+margin_top = 55.0
+margin_right = 137.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 22 )
+expand_icon = true
+
+[node name="btnFormat" type="Button" parent="hboxOptions"]
+margin_left = 918.0
+margin_right = 1024.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+text = "  Format  "
+[connection signal="pressed" from="hboxOptions/btnFormat" to="." method="_on_btnFormat_pressed"]
